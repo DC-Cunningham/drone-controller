@@ -21,6 +21,7 @@ export default {
     return axios.put("/api/command", commandData);
   },
   getFlightPaths: function () {
+    console.log("api hit");
     return axios.get("/api/flightpath");
   },
   // Gets the flight path with the given id

@@ -1,10 +1,14 @@
-// import React from "react";
-// import API from "../utils/API";
+import React from "react";
+import API from "../utils/API";
 
-// const droneInput = API.getFlightPath;
+const flightPaths = () => {
+  API.getFlightPaths()
+    .then((res) => console.log(res.data))
+    .catch((err) => console.log(err));
+};
 // const photoLocations = [];
 
-// // const flightPath = API;
+// const flightPath = API;
 // let dronePosition = { x: 0, y: 0, step: 0, lastCommand: "" };
 
 // for (let i = 0; i < droneInput.length; i++) {
@@ -83,14 +87,16 @@
 // //The number of individual Billboards photographed is 655
 // console.log(uniquePhotoLocations.length);
 
-// function Detail() {
-//   return (
-//     <>
-//       <div>
-//         The number of command given for the complete Flight Path was{" "}
-//         {droneInput.length}
-//       </div>
-//     </>
-//   );
-// }
-// export default Detail;
+const words = flightPaths();
+
+function Detail() {
+  return (
+    <>
+      <div>
+        The number of command given for the complete Flight Path was
+        {words}
+      </div>
+    </>
+  );
+}
+export default Detail;

@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const commandStringController = require("../../controllers/commandStringController");
 
-// Matches with "/api/users"
 router
   .route("/")
   .get(commandStringController.findAll)

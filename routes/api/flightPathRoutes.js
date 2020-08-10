@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const flightPathController = require("../../controllers/flightPathController");
 
-// Matches with "/api/users"
 router
   .route("/")
   .get(flightPathController.findAll)

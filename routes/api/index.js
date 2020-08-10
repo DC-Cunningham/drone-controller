@@ -3,6 +3,6 @@ const flightPathRoutes = require("./flightPathRoutes");
 const commandStringRoutes = require("./commandStringRoutes");
 
 router.use("/flightpath", flightPathRoutes);
-router.use("/commandstring", commandStringRoutes);
+router.use("/command", commandStringRoutes);
 
 module.exports = router;
