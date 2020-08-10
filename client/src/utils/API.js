@@ -15,14 +15,15 @@ export default {
   },
   // Saves a command string to the database
   saveCommand: function (commandData) {
+    console.log("saveCommand Hit");
     return axios.post("/api/command", commandData);
   },
   updateCommand: function (commandData) {
     return axios.put("/api/command", commandData);
   },
   getFlightPaths: function () {
-    console.log("api hit");
-    return axios.get("/api/flightpath");
+    console.log("getFlightPaths hit");
+    return axios.get("/api/command");
   },
   // Gets the flight path with the given id
   getFlightPath: function (id) {
@@ -35,6 +36,7 @@ export default {
   },
   // Saves a flight path to the database
   saveFlightpath: function (flightPathData) {
+    console.log("SaveFlightpath Hit");
     return axios.post("/api/flightpath", flightPathData);
   },
   updateFlightPath: function (flightPathData) {
