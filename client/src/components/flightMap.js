@@ -17,10 +17,10 @@ const FlightMap = (props) => {
     return array.filter((v) => v === value).length;
   }
 
-  const update = (x, y) => {
+  const update = (x, y, colour) => {
     const newArray = [...colours].map((row, index) => {
       if (index === y) {
-        row.splice(x, 1, selected);
+        row.splice(x, 1, colour);
       }
       return row;
     });

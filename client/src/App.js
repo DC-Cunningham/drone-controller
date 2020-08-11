@@ -6,8 +6,6 @@ import FlightPaths from "./components/flightPaths";
 function App() {
   return (
     <div>
-      Hello
-      <Detail />
       <NewCommand />
       <FlightPaths />
     </div>
