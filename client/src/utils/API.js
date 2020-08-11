@@ -22,12 +22,10 @@ export default {
     return axios.put("/api/command", commandData);
   },
   getFlightPaths: function () {
-    console.log("getFlightPaths hit");
-    return axios.get("/api/command");
+    return axios.get("/api/flightpath");
   },
   // Gets the flight path with the given id
   getFlightPath: function (id) {
-    console.log(id);
     return axios.get("/api/flightpath/" + id);
   },
   // Deletes the flight path with the given id
@@ -36,7 +34,6 @@ export default {
   },
   // Saves a flight path to the database
   saveFlightpath: function (flightPathData) {
-    console.log("SaveFlightpath Hit");
     return axios.post("/api/flightpath", flightPathData);
   },
   updateFlightPath: function (flightPathData) {

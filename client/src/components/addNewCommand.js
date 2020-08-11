@@ -15,13 +15,13 @@ class NewCommand extends React.Component {
   }
 
   handleSubmit(event) {
-    alert("A command was submitted: " + this.state.value);
     event.preventDefault();
     const commandData = { commands: this.state.value };
     API.saveCommand(commandData)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
     this.setState({ value: "" });
+    alert("A command was submitted: " + this.state.value);
   }
 
   render() {

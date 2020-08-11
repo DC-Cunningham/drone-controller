@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const commandStringSchema = new mongoose.Schema({
+const commandStringSchema = new Schema({
+  name: String,
   commands: String,
 });
 

@@ -1,6 +1,7 @@
 import React from "react";
 import Detail from "./components/detail";
 import NewCommand from "./components/addNewCommand";
+import FlightPaths from "./components/flightPaths";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       Hello
       <Detail />
       <NewCommand />
+      <FlightPaths />
     </div>
   );
 }

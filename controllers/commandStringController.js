@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the componentsController
+// Defining methods for the commandStringController
 module.exports = {
   findAll: function (req, res) {
     const query = req.query || {};
