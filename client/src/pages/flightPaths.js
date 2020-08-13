@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import FlightMap from "../components/FlightMap/flightMap";
 import styled from "styled-components";
+import Legend from "../components/FlightMap/legend";
 
 const Box = styled.div`
+  width: 1200px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 `;
 
 const Break = styled.div`
@@ -15,7 +16,7 @@ const Break = styled.div`
 `;
 
 const StyledContainer = styled.div`
-  max-width: 300px;
+  max-width: 350px;
   width: 100%;
   height: 320px;
   margin: 10px;
@@ -24,9 +25,6 @@ const StyledContainer = styled.div`
   border-radius: 10% 25%;
   padding: 25px 12px 18px;
   float: left;
-`;
-
-const Card = styled.div`
   display: block;
 `;
 
@@ -54,12 +52,13 @@ const Data = styled.p`
 `;
 
 const Button = styled.button`
+max-height: 50px;
   margin: 10px;
   padding: 8px 14px;
   background: #c24a66;
   color: ${({ theme }) => theme.primaryDark}};
   cursor: pointer;
-  border: 1px solid #fff;
+  border: 1px solid ${({ theme }) => theme.primaryDark}};
   border-radius: 10%;
   outline: 0;
   font-weight: 300;
@@ -114,45 +113,66 @@ function FlightPaths() {
   return (
     <>
       <Box>
-        <Title>Saved Flight Paths</Title>
-        <Break />
-        {storedFlightPaths.length ? (
-          storedFlightPaths.map((flightPath) => (
+        {currentFlight.flightPath.length ? (
+          <>
+            <Button
+              onClick={(e) =>
+                setCurrentFlight({
+                  flightPath: [],
+                  photoLocations: [],
+                  name: "",
+                })
+              }
+            >
+              Back
+            </Button>
+            <Break />
             <StyledContainer>
-              <Card>
-                <CardTitle>{flightPath.name}</CardTitle>
-                <Data>
-                  <strong>Sequence Length: </strong>
-                  {flightPath.flightPath.length} commands
-                </Data>
-                <Data>
-                  <strong># of Photos Taken: </strong>
-                  {flightPath.photoLocations.length}
-                </Data>
-                <Data>
-                  <strong># of unique Photo Locations: </strong>
-                  {uniquePhotoLocations(flightPath.photoLocations).length}
-                </Data>
-                <Button
-                  value={flightPath._id}
-                  onClick={setFlightDisplayed.bind(this, flightPath._id)}
-                >
-                  Select
-                </Button>
-              </Card>
+              <CardTitle>{currentFlight.name}</CardTitle>
+              <Data>
+                <strong>Sequence Length: </strong>
+                {currentFlight.flightPath.length} commands
+              </Data>
+              <Data>
+                <strong>Number of Photos Taken: </strong>
+                {currentFlight.photoLocations.length}
+              </Data>
+              <Data>
+                <strong>Number of unique Photo Locations: </strong>
+                {uniquePhotoLocations(currentFlight.photoLocations).length}
+              </Data>
+            </StyledContainer>
+            <Legend />
+            <Break />
+            <FlightMap currentFlight={currentFlight} />
+          </>
+        ) : storedFlightPaths.length ? (
+          storedFlightPaths.map((flightPath) => (
+            <StyledContainer key={flightPath._id}>
+              <CardTitle>{flightPath.name}</CardTitle>
+              <Data>
+                <strong>Sequence Length: </strong>
+                {flightPath.flightPath.length} commands
+              </Data>
+              <Data>
+                <strong>Number of Photos Taken: </strong>
+                {flightPath.photoLocations.length}
+              </Data>
+              <Data>
+                <strong>Number of unique Photo Locations: </strong>
+                {uniquePhotoLocations(flightPath.photoLocations).length}
+              </Data>
+              <Button
+                value={flightPath._id}
+                onClick={setFlightDisplayed.bind(this, flightPath._id)}
+              >
+                Select
+              </Button>
             </StyledContainer>
           ))
         ) : (
           <div>There are no stored Flight Paths</div>
         )}
-        <Break />
-        <Card>
-          {currentFlight.flightPath.length ? (
-            <FlightMap currentFlight={currentFlight} />
-          ) : (
-            <h2>Please select a Flight Path to display</h2>
-          )}
-        </Card>
       </Box>
     </>
   );

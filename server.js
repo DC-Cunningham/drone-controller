@@ -5,8 +5,8 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.urlencoded({ limit: "25mb" }, { extended: true }));
+app.use(express.json({ limit: "25mb" }));
 mongoose.set("useFindAndModify", false);
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

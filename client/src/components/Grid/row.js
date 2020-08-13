@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const StyledRow = styled.div`
   display: flex;
+  margin-top: auto;
 `;
 
 // takes in array of hex values
