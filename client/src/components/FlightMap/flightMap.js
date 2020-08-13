@@ -1,6 +1,15 @@
 import React, { useState } from "react";
-import Grid from "./grid";
-import "./flightMap.css";
+import Grid from "../Grid/grid";
+import Legend from "./legend";
+import styled from "styled-components";
+
+const MapContainer = styled.div`
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: ${({ theme }) => theme.primaryDark};
+`;
 
 const makeArray = (size) => {
   return Array(size).fill(Array(size).fill("#61DAF9"));
@@ -29,9 +38,10 @@ const FlightMap = (props) => {
 
   return (
     <>
-      <div className="map-container">
+      <MapContainer>
         <Grid colours={colours} />
-      </div>
+      </MapContainer>
+      <Legend />
     </>
   );
 };

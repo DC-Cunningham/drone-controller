@@ -1,8 +1,9 @@
 import React from "react";
+import DroneImage from "../Images/Drone.png";
 
 class Home extends React.Component {
   render() {
-    return <div>HomePage</div>;
+    return <img src={DroneImage} />;
   }
 }
 

@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
-import FlightMap from "../components/flightMap";
+import FlightMap from "../components/FlightMap/flightMap";
 import styled from "styled-components";
 
 const Box = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const Break = styled.div`
   flex-basis: 100%;
-  height: 0;
+  height: 20px;
 `;
 
 const StyledContainer = styled.div`
   max-width: 300px;
   width: 100%;
-  height: 300px;
+  height: 320px;
   margin: 10px;
+  background-color: ${({ theme }) => theme.primaryLight};
   border: 1px solid;
   border-radius: 10% 25%;
   padding: 25px 12px 18px;
@@ -29,7 +31,7 @@ const Card = styled.div`
 `;
 
 const Title = styled.h2`
-  color: #000000;
+  color:${({ theme }) => theme.primaryLight}};
   font-weight: 300;
   height: 100px;
   @media (max-width: 500px) {
@@ -37,22 +39,28 @@ const Title = styled.h2`
   }
 `;
 
-const Date = styled.div`
-  color: #ccc;
+const CardTitle = styled.h2`
+  text-align: center;
+  color:${({ theme }) => theme.primaryDark}};
   font-weight: 300;
-  margin: 6px 0;
+  height: 100px;
   @media (max-width: 500px) {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 `;
 
+const Data = styled.p`
+  color:${({ theme }) => theme.primaryDark}};
+`;
+
 const Button = styled.button`
-  margin: 10px 5px;
+  margin: 10px;
   padding: 8px 14px;
-  background: rgba(155, 155, 155, 0.2);
-  color: #fff;
+  background: #c24a66;
+  color: ${({ theme }) => theme.primaryDark}};
   cursor: pointer;
   border: 1px solid #fff;
+  border-radius: 10%;
   outline: 0;
   font-weight: 300;
   float: right;
@@ -106,25 +114,25 @@ function FlightPaths() {
   return (
     <>
       <Box>
-        <Title>Available Flight Paths</Title>
+        <Title>Saved Flight Paths</Title>
         <Break />
         {storedFlightPaths.length ? (
           storedFlightPaths.map((flightPath) => (
             <StyledContainer>
               <Card>
-                <Title>{flightPath.name}</Title>
-                <div>
+                <CardTitle>{flightPath.name}</CardTitle>
+                <Data>
                   <strong>Sequence Length: </strong>
                   {flightPath.flightPath.length} commands
-                </div>
-                <div>
-                  <strong>Number of Photos Taken: </strong>
+                </Data>
+                <Data>
+                  <strong># of Photos Taken: </strong>
                   {flightPath.photoLocations.length}
-                </div>
-                <div>
-                  <strong>Number of unique Photo Locations: </strong>
+                </Data>
+                <Data>
+                  <strong># of unique Photo Locations: </strong>
                   {uniquePhotoLocations(flightPath.photoLocations).length}
-                </div>
+                </Data>
                 <Button
                   value={flightPath._id}
                   onClick={setFlightDisplayed.bind(this, flightPath._id)}

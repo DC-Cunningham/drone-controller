@@ -7,8 +7,8 @@ import FlightPaths from "./pages/flightPaths";
 import Home from "./pages/home";
 import { theme } from "./style/theme";
 import { GlobalStyles } from "./style/globalStyle";
-import NavToggler from "./components/NavToggler";
-import Menu from "./components/Menu";
+import NavToggler from "./components/Menu/NavToggler";
+import Menu from "./components/Menu/Menu";
 
 function App() {
   const [open, setOpen] = useState(false);
