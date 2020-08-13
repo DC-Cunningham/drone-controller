@@ -6,16 +6,16 @@ const makeArray = (size) => {
   return Array(size).fill(Array(size).fill("#61DAF9"));
 };
 
+function getOccurrence(array, value) {
+  return array.filter((v) => v === value).length;
+}
+
 const FlightMap = (props) => {
   const [selected, setSelected] = useState("");
   const [colours, setColors] = useState(makeArray(10));
 
   const flightPathArray = props.currentFlight.flightPath;
   const value = "";
-
-  function getOccurrence(array, value) {
-    return array.filter((v) => v === value).length;
-  }
 
   const update = (x, y, colour) => {
     const newArray = [...colours].map((row, index) => {

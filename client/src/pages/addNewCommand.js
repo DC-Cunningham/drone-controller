@@ -1,11 +1,10 @@
 import React from "react";
 import API from "../utils/API";
 
-const calculateFlightPath = (commands) => {
+const calculateFlightPath = (commands, sequenceName) => {
   let dronePosition = { x: 0, y: 0, step: 0, lastCommand: "" };
   const flightPath = [];
   const photoLocations = [];
-  console.log(commands);
 
   for (let i = 0; i < commands.length; i++) {
     let command = commands.charAt(i);
@@ -55,34 +54,16 @@ const calculateFlightPath = (commands) => {
         break;
     }
   }
-  return flightPath;
-  // const uniquePhotoLocations = photoLocations.reduce((accumulator, current) => {
-  //   if (checkIfAlreadyExist(current)) {
-  //     return accumulator;
-  //   } else {
-  //     return [...accumulator, current];
-  //   }
 
-  //   function checkIfAlreadyExist(currentVal) {
-  //     return accumulator.some((item) => {
-  //       return item.x === currentVal.x && item.y === currentVal.y;
-  //     });
-  //   }
-  // }, []);
+  let calculatedFlightPath = {
+    flightPath: flightPath,
+    photoLocations: photoLocations,
+    name: sequenceName,
+  };
 
-  // console.log(flightPath);
-  // console.log(photoLocations);
-  // console.log(uniquePhotoLocations);
-
-  // //The number of commands given to the drone is 5853
-  // console.log(commands.length);
-
-  // // The number of Billboard photographs taken is 1195
-  // console.log(photoLocations.length);
-
-  // //The number of individual Billboards photographed is 655
-  // console.log(uniquePhotoLocations.length);
+  return calculatedFlightPath;
 };
+
 class NewCommand extends React.Component {
   constructor(props) {
     super(props);
@@ -109,11 +90,7 @@ class NewCommand extends React.Component {
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
     this.setState({ value: "" });
-    const calculatedFlightPath = {
-      flightPath: calculateFlightPath(commandData.commands),
-      name: sequenceName,
-    };
-    API.saveFlightpath(calculatedFlightPath)
+    API.saveFlightpath(calculateFlightPath(commandData.commands, sequenceName))
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   }
@@ -122,7 +99,7 @@ class NewCommand extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Please enter a new command string:
+          Please enter a new command sequence:
           <input
             type="text"
             value={this.state.value}
