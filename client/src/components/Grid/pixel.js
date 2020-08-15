@@ -9,7 +9,7 @@ const StyledPixel = styled.div`
 
 const TooltipBox = styled.div`
   position: absolute;
-  bottom: calc(100% + 10px);
+  top: calc(100% + 10px);
   visibility: hidden;
   color: #000000;
   background-color: rgba(252, 252, 252, 0.8);
@@ -38,12 +38,15 @@ export default function Pixel(props) {
   return (
     <>
       <TooltipCard>
-        <StyledPixel style={{ backgroundColor: props.colour }} />
+        <StyledPixel style={{ backgroundColor: props.flightPoint.colour }}>
+          {props.flightPoint.photoCount}
+        </StyledPixel>
         <TooltipBox>
-          <p>Position [x,y]</p>
+          <p>
+            Position [x: {props.flightPoint.x}, y: {props.flightPoint.y} ]
+          </p>
           <p>Status [flown, unflown, photo]</p>
-          <p>Photo Count = ?</p>
-          <p>Photos taken at command [2,4,2,5]</p>
+          <p>Photo Count = {props.flightPoint.photoCount}</p>
         </TooltipBox>
       </TooltipCard>
     </>

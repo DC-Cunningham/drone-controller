@@ -10,8 +10,8 @@ const StyledRow = styled.div`
 // takes in array of hex values
 // returns a row of pixels
 export default function Row(props) {
-  const row = props.colours.map((colour, index) => {
-    return <Pixel key={index} colour={colour} />;
+  const row = props.flightPoint.map((flightPoint, index) => {
+    return <Pixel key={index} flightPoint={flightPoint} />;
   });
   return <StyledRow>{row}</StyledRow>;
 }

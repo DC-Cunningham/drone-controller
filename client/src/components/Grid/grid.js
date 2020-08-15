@@ -9,8 +9,8 @@ const StyledGrid = styled.div`
 // takes in array of arrays as props
 // returns a bunch of Row components
 export default function Grid(props) {
-  const grid = props.colours.map((colours, index) => {
-    return <Row key={index} colours={colours} index={index} />;
+  const grid = props.flightPoint.map((flightPoint, index) => {
+    return <Row key={index} flightPoint={flightPoint} index={index} />;
   });
   return <StyledGrid>{grid}</StyledGrid>;
 }

@@ -52,6 +52,8 @@ const calculateFlightPath = (commands, sequenceName) => {
           photoNumber: photoLocations.length,
         });
         break;
+      default:
+        return;
     }
   }
 

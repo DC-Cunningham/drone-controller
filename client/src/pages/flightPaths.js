@@ -30,6 +30,7 @@ const StyledContainer = styled.div`
 
 const Title = styled.h2`
   color:${({ theme }) => theme.primaryLight}};
+  align-text: center;
   font-weight: 300;
   height: 100px;
   @media (max-width: 500px) {

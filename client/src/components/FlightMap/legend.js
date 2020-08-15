@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Pixel from "../Grid/pixel";
 
 const StyledContainer = styled.div`
   width: 700px;
