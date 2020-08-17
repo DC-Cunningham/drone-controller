@@ -76,6 +76,8 @@ function FlightPaths() {
   const [storedFlightPaths, setStoredFlightPaths] = useState([]);
   const [currentFlight, setCurrentFlight] = useState({
     PhotoCount: 0,
+    uniquePhotoCount: 0,
+
     sequenceCount: 0,
     xMin: 0,
     yMin: 0,
@@ -95,25 +97,11 @@ function FlightPaths() {
       .catch((err) => console.log(err));
   };
 
-  const uniquePhotoLocations = (obj) => {
-    console.log(Object.keys(obj).length);
-    if (Object.keys(obj).length > 0) {
-      const filtered = Object.keys(obj).forEach(
-        (key) => obj[key] === true && delete obj[key]
-      );
-      console.log("filtered", filtered);
-      return Object.keys(obj).length;
-    }
-    return 0;
-  };
-
   const setFlightDisplayed = (req) => {
     API.getFlightPath(req)
       .then((res) => setCurrentFlight(res.data))
       .catch((err) => console.log(err));
   };
-
-  console.log("datapoints", currentFlight.dataPoints);
 
   return (
     <>
@@ -124,6 +112,8 @@ function FlightPaths() {
               onClick={(e) =>
                 setCurrentFlight({
                   PhotoCount: 0,
+                  uniquePhotoCount: 0,
+
                   sequenceCount: 0,
                   xMin: 0,
                   yMin: 0,
@@ -149,7 +139,7 @@ function FlightPaths() {
               </Data>
               <Data>
                 <strong>Number of unique Photo Locations: </strong>
-                {uniquePhotoLocations(currentFlight.dataPoints).length}
+                {currentFlight.uniquePhotoCount}
               </Data>
             </StyledContainer>
             <Legend />
@@ -170,7 +160,7 @@ function FlightPaths() {
               </Data>
               <Data>
                 <strong>Number of unique Photo Locations: </strong>
-                {uniquePhotoLocations(flightPath.dataPoints)}
+                {flightPath.uniquePhotoCount}
               </Data>
               <Button
                 value={flightPath._id}

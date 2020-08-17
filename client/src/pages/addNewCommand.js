@@ -9,6 +9,7 @@ const calculateFlightPath = (commands, name) => {
     yMax: 0,
     dataPoints: {},
     photoCount: 0,
+    uniquePhotoCount: 0,
     sequenceCount: 0,
     name,
   };
@@ -112,6 +113,14 @@ const calculateFlightPath = (commands, name) => {
         break;
       }
     }
+  }
+
+  if (Object.keys(obj.dataPoints).length > 0) {
+    let newObj = obj.dataPoints;
+    Object.keys(newObj).forEach(
+      (key) => newObj[key] === true && delete newObj[key]
+    );
+    obj = { ...obj, uniquePhotoCount: Object.keys(newObj).length };
   }
   console.log(obj);
   return obj;

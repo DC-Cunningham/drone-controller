@@ -5,6 +5,7 @@ const flightPathSchema = new Schema({
   name: String,
   sequenceCount: Number,
   photoCount: Number,
+  uniquePhotoCount: Number,
   xMin: Number,
   yMin: Number,
   xMax: Number,
