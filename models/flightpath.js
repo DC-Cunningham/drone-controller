@@ -3,6 +3,8 @@ const Schema = mongoose.Schema;
 
 const flightPathSchema = new Schema({
   name: String,
+  sequenceCount: Number,
+  photoCount: Number,
   xMin: Number,
   yMin: Number,
   xMax: Number,

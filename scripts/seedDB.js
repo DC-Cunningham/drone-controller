@@ -1800,6 +1800,8 @@ const flightPathSeed = [
       "-14,26": true,
       "-15,27": [1664, 1665],
     },
+    photoCount: 1665,
+    sequenceCount: 8192,
     name: "Provided Flight Path",
   },
 ];

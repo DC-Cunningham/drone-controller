@@ -75,8 +75,13 @@ max-height: 50px;
 function FlightPaths() {
   const [storedFlightPaths, setStoredFlightPaths] = useState([]);
   const [currentFlight, setCurrentFlight] = useState({
-    flightPath: [],
-    photoLocations: [],
+    PhotoCount: 0,
+    sequenceCount: 0,
+    xMin: 0,
+    yMin: 0,
+    xMax: 0,
+    yMax: 0,
+    dataPoints: {},
     name: "",
   });
 
@@ -90,20 +95,17 @@ function FlightPaths() {
       .catch((err) => console.log(err));
   };
 
-  const uniquePhotoLocations = (array) =>
-    array.reduce((accumulator, current) => {
-      if (checkIfAlreadyExist(current)) {
-        return accumulator;
-      } else {
-        return [...accumulator, current];
-      }
-
-      function checkIfAlreadyExist(currentVal) {
-        return accumulator.some((item) => {
-          return item.x === currentVal.x && item.y === currentVal.y;
-        });
-      }
-    }, []);
+  const uniquePhotoLocations = (obj) => {
+    console.log(Object.keys(obj).length);
+    if (Object.keys(obj).length > 0) {
+      const filtered = Object.keys(obj).forEach(
+        (key) => obj[key] === true && delete obj[key]
+      );
+      console.log("filtered", filtered);
+      return Object.keys(obj).length;
+    }
+    return 0;
+  };
 
   const setFlightDisplayed = (req) => {
     API.getFlightPath(req)
@@ -111,16 +113,23 @@ function FlightPaths() {
       .catch((err) => console.log(err));
   };
 
+  console.log("datapoints", currentFlight.dataPoints);
+
   return (
     <>
       <Box>
-        {currentFlight.flightPath.length ? (
+        {currentFlight.sequenceCount > 0 ? (
           <>
             <Button
               onClick={(e) =>
                 setCurrentFlight({
-                  flightPath: [],
-                  photoLocations: [],
+                  PhotoCount: 0,
+                  sequenceCount: 0,
+                  xMin: 0,
+                  yMin: 0,
+                  xMax: 0,
+                  yMax: 0,
+                  dataPoints: {},
                   name: "",
                 })
               }
@@ -132,15 +141,15 @@ function FlightPaths() {
               <CardTitle>{currentFlight.name}</CardTitle>
               <Data>
                 <strong>Sequence Length: </strong>
-                {currentFlight.flightPath.length} commands
+                {currentFlight.sequenceCount} commands
               </Data>
               <Data>
                 <strong>Number of Photos Taken: </strong>
-                {currentFlight.photoLocations.length}
+                {currentFlight.photoCount}
               </Data>
               <Data>
                 <strong>Number of unique Photo Locations: </strong>
-                {uniquePhotoLocations(currentFlight.photoLocations).length}
+                {uniquePhotoLocations(currentFlight.dataPoints).length}
               </Data>
             </StyledContainer>
             <Legend />
@@ -153,15 +162,15 @@ function FlightPaths() {
               <CardTitle>{flightPath.name}</CardTitle>
               <Data>
                 <strong>Sequence Length: </strong>
-                {flightPath.flightPath.length} commands
+                {flightPath.commandCount} commands
               </Data>
               <Data>
                 <strong>Number of Photos Taken: </strong>
-                {flightPath.photoLocations.length}
+                {flightPath.photoCount}
               </Data>
               <Data>
                 <strong>Number of unique Photo Locations: </strong>
-                {uniquePhotoLocations(flightPath.photoLocations).length}
+                {uniquePhotoLocations(flightPath.dataPoints)}
               </Data>
               <Button
                 value={flightPath._id}

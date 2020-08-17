@@ -8,17 +8,23 @@ const calculateFlightPath = (commands, name) => {
     xMax: 0,
     yMax: 0,
     dataPoints: {},
+    photoCount: 0,
+    sequenceCount: 0,
     name,
   };
   let imageCount = 0,
+    totalPhotoCount = 0,
+    commandCount = 0,
     currentX = 0,
     currentY = 0;
   for (let char of commands) {
     switch (char) {
       case "<": {
+        commandCount++;
         currentX--;
         obj = {
           ...obj,
+          sequenceCount: commandCount,
           xMin: obj.xMin > currentX ? currentX : obj.xMin,
           dataPoints: {
             ...obj.dataPoints,
@@ -32,9 +38,11 @@ const calculateFlightPath = (commands, name) => {
         break;
       }
       case ">": {
+        commandCount++;
         currentX++;
         obj = {
           ...obj,
+          sequenceCount: commandCount,
           xMax: obj.xMax < currentX ? currentX : obj.xMax,
           dataPoints: {
             ...obj.dataPoints,
@@ -48,9 +56,11 @@ const calculateFlightPath = (commands, name) => {
         break;
       }
       case "v": {
+        commandCount++;
         currentY--;
         obj = {
           ...obj,
+          sequenceCount: commandCount,
           yMin: obj.yMin > currentY ? currentY : obj.yMin,
           dataPoints: {
             ...obj.dataPoints,
@@ -64,9 +74,11 @@ const calculateFlightPath = (commands, name) => {
         break;
       }
       case "^": {
+        commandCount++;
         currentY++;
         obj = {
           ...obj,
+          sequenceCount: commandCount,
           yMax: obj.yMax < currentY ? currentY : obj.yMax,
           dataPoints: {
             ...obj.dataPoints,
@@ -80,9 +92,12 @@ const calculateFlightPath = (commands, name) => {
         break;
       }
       case "x": {
+        commandCount++;
         imageCount++;
+        totalPhotoCount++;
         obj = {
           ...obj,
+          photoCount: totalPhotoCount,
           dataPoints: {
             ...obj.dataPoints,
             [`${currentX},${currentY}`]: Array.isArray(
