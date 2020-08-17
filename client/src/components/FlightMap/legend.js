@@ -27,9 +27,9 @@ const StyledText = styled.p`
 function Legend() {
   return (
     <StyledContainer>
-      <StyledPixel colour="#000000" />
+      <StyledPixel colour="#70dcfa" />
       <StyledText> - Unflown Airspace </StyledText>
-      <StyledPixel colour="#61DAF9" />
+      <StyledPixel colour="#1a963b" />
       <StyledText> - Flown Airspace </StyledText>
       <StyledPixel colour="#cc0404" />
       <StyledText> - Photo Location </StyledText>

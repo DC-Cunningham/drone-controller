@@ -12,7 +12,7 @@ const TooltipBox = styled.div`
   top: calc(100% + 10px);
   visibility: hidden;
   color: #000000;
-  background-color: rgba(252, 252, 252, 0.8);
+  background-color: rgba(252, 252, 252, 1);
   width: 200px;
   padding: 5px 5px;
   border-radius: 4px;
@@ -24,11 +24,11 @@ const TooltipCard = styled.div`
   & ${StyledPixel}:hover + ${TooltipBox} {
     visibility: visible;
     color: #000000;
-    background-color: rgba(252, 252, 252, 0.8);
+    background-color: rgba(252, 252, 252, 1);
     width: 200px;
     padding: 8px 8px;
     &:before {
-      border-color: transparent transparent rgba(252, 252, 252, 0.8)
+      border-color: transparent transparent rgba(252, 252, 252, 1)
         rgba(252, 252, 252, 0.8);
     }
   }
@@ -39,13 +39,13 @@ export default function Pixel(props) {
     <>
       <TooltipCard>
         <StyledPixel style={{ backgroundColor: props.flightPoint.colour }}>
-          {props.flightPoint.photoCount}
+          {props.flightPoint.photoCount > 0 ? props.flightPoint.photoCount : ""}
         </StyledPixel>
         <TooltipBox>
           <p>
             Position [x: {props.flightPoint.x}, y: {props.flightPoint.y} ]
           </p>
-          <p>Status [flown, unflown, photo]</p>
+          <p>Status: {props.flightPoint.status}</p>
           <p>Photo Count = {props.flightPoint.photoCount}</p>
         </TooltipBox>
       </TooltipCard>

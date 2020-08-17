@@ -1,69 +1,105 @@
 import React from "react";
 import API from "../utils/API";
 
-const calculateFlightPath = (commands, sequenceName) => {
-  let dronePosition = { x: 0, y: 0, step: 0, lastCommand: "" };
-  const flightPath = [];
-  const photoLocations = [];
-
-  for (let i = 0; i < commands.length; i++) {
-    let command = commands.charAt(i);
-    switch (command) {
-      case "<":
-        dronePosition = {
-          x: dronePosition.x - 1,
-          y: dronePosition.y,
-          step: dronePosition.step + 1,
-          lastCommand: "<",
+const calculateFlightPath = (commands, name) => {
+  let obj = {
+    xMin: 0,
+    yMin: 0,
+    xMax: 0,
+    yMax: 0,
+    dataPoints: {},
+    name,
+  };
+  let imageCount = 0,
+    currentX = 0,
+    currentY = 0;
+  for (let char of commands) {
+    switch (char) {
+      case "<": {
+        currentX--;
+        obj = {
+          ...obj,
+          xMin: obj.xMin > currentX ? currentX : obj.xMin,
+          dataPoints: {
+            ...obj.dataPoints,
+            [`${currentX},${currentY}`]: Array.isArray(
+              obj.dataPoints[`${currentX},${currentY}`]
+            )
+              ? obj.dataPoints[`${currentX},${currentY}`]
+              : true,
+          },
         };
-        flightPath.push(dronePosition);
         break;
-      case ">":
-        dronePosition = {
-          x: dronePosition.x + 1,
-          y: dronePosition.y,
-          step: dronePosition.step + 1,
-          lastCommand: ">",
+      }
+      case ">": {
+        currentX++;
+        obj = {
+          ...obj,
+          xMax: obj.xMax < currentX ? currentX : obj.xMax,
+          dataPoints: {
+            ...obj.dataPoints,
+            [`${currentX},${currentY}`]: Array.isArray(
+              obj.dataPoints[`${currentX},${currentY}`]
+            )
+              ? obj.dataPoints[`${currentX},${currentY}`]
+              : true,
+          },
         };
-        flightPath.push(dronePosition);
         break;
-      case "^":
-        dronePosition = {
-          x: dronePosition.x,
-          y: dronePosition.y + 1,
-          step: dronePosition.step + 1,
-          lastCommand: "^",
+      }
+      case "v": {
+        currentY--;
+        obj = {
+          ...obj,
+          yMin: obj.yMin > currentY ? currentY : obj.yMin,
+          dataPoints: {
+            ...obj.dataPoints,
+            [`${currentX},${currentY}`]: Array.isArray(
+              obj.dataPoints[`${currentX},${currentY}`]
+            )
+              ? obj.dataPoints[`${currentX},${currentY}`]
+              : true,
+          },
         };
-        flightPath.push(dronePosition);
         break;
-      case "v":
-        dronePosition = {
-          x: dronePosition.x,
-          y: dronePosition.y - 1,
-          step: dronePosition.step + 1,
-          lastCommand: "v",
+      }
+      case "^": {
+        currentY++;
+        obj = {
+          ...obj,
+          yMax: obj.yMax < currentY ? currentY : obj.yMax,
+          dataPoints: {
+            ...obj.dataPoints,
+            [`${currentX},${currentY}`]: Array.isArray(
+              obj.dataPoints[`${currentX},${currentY}`]
+            )
+              ? obj.dataPoints[`${currentX},${currentY}`]
+              : true,
+          },
         };
-        flightPath.push(dronePosition);
         break;
-      case "x":
-        photoLocations.push({
-          x: dronePosition.x,
-          y: dronePosition.y,
-          photoNumber: photoLocations.length,
-        });
+      }
+      case "x": {
+        imageCount++;
+        obj = {
+          ...obj,
+          dataPoints: {
+            ...obj.dataPoints,
+            [`${currentX},${currentY}`]: Array.isArray(
+              obj.dataPoints[`${currentX},${currentY}`]
+            )
+              ? [...obj.dataPoints[`${currentX},${currentY}`], imageCount]
+              : [imageCount],
+          },
+        };
+      }
+      default: {
         break;
-      default:
-        return;
+      }
     }
   }
-
-  let calculatedFlightPath = {
-    flightPath: flightPath,
-    photoLocations: photoLocations,
-    name: sequenceName,
-  };
-
-  return calculatedFlightPath;
+  console.log(obj);
+  return obj;
 };
 
 class NewCommand extends React.Component {
