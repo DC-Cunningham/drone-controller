@@ -16,19 +16,20 @@ const MapContainer = styled.div`
 
 const makeArray = (flightData) => {
   const { xMin, xMax, yMin, yMax, dataPoints } = flightData;
-  console.log(flightData);
+  console.log(dataPoints);
   const yArray = [];
   for (let i = yMin; i < yMax + 1; i++) {
     const xArray = [];
     for (let j = xMin; j < xMax + 1; j++) {
-      xArray.push({
-        x: j,
-        y: i,
-        step: 0,
-        colour: "#70dcfa",
-        status: "unflown airspace",
-        photoCount: 0,
-      });
+      if ([`${j},${i}`] in dataPoints) {
+        xArray.push({
+          x: j,
+          y: i,
+          pointData: dataPoints[`${j},${i}`],
+        });
+      } else {
+        xArray.push({ x: j, y: i, pointData: false });
+      }
     }
     yArray.unshift(xArray);
   }
@@ -39,53 +40,8 @@ const FlightMap = (props) => {
   const [loading, setLoading] = useState(true);
   const [flightPoint, setFlightPoint] = useState([]);
 
-  // const renderFlightMap = () => {
-  //   console.log(flightPoint);
-  //   const newArray = [];
-  //   for (let i = 0; i < flightPathArray.length; i++) {
-  //     const row = flightPoint.map((row, index) => {
-  //       const newFlightPoint = {
-  //         x: flightPathArray[i].x,
-  //         y: flightPathArray[i].y,
-  //         colour: row[index].colour,
-  //         status: row[index].status,
-  //         photoCount: row[index].photoCount,
-  //       };
-  //       if (
-  //         flightPathArray[i].lastCommand !== "x" &&
-  //         row[index].x === flightPathArray[i].x &&
-  //         row[index].y === flightPathArray[i].y
-  //       ) {
-  //         row.splice(index, 1, {
-  //           ...newFlightPoint,
-  //           colour: "#1a963b",
-  //           status: "flown airspace",
-  //         });
-  //       } else if (
-  //         flightPathArray[i].lastCommand === "x" &&
-  //         row[index].x === flightPathArray[i].x &&
-  //         row[index].y === flightPathArray[i].y
-  //       ) {
-  //         row.splice(index, 1, {
-  //           ...newFlightPoint,
-  //           colour: "#cc0404",
-  //           status: "photo location",
-  //           photoCount: row[index].photoCount + 1,
-  //         });
-  //       } else {
-  //         console.log("else");
-  //       }
-  //       console.log(row);
-  //       return row;
-  //     });
-  //     newArray.push(row);
-  //   }
-  //   setFlightPoint(newArray);
-  //   console.log(newArray);
-  // };
-
   useEffect(() => {
-    makeArray(props.currentFlight);
+    setFlightPoint(makeArray(props.currentFlight));
     setLoading(false);
   }, []);
 

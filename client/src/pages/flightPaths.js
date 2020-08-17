@@ -152,7 +152,7 @@ function FlightPaths() {
               <CardTitle>{flightPath.name}</CardTitle>
               <Data>
                 <strong>Sequence Length: </strong>
-                {flightPath.commandCount} commands
+                {flightPath.sequenceCount} commands
               </Data>
               <Data>
                 <strong>Number of Photos Taken: </strong>

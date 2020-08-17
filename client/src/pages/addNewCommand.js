@@ -99,6 +99,7 @@ const calculateFlightPath = (commands, name) => {
         obj = {
           ...obj,
           photoCount: totalPhotoCount,
+          sequenceCount: commandCount,
           dataPoints: {
             ...obj.dataPoints,
             [`${currentX},${currentY}`]: Array.isArray(
@@ -116,13 +117,15 @@ const calculateFlightPath = (commands, name) => {
   }
 
   if (Object.keys(obj.dataPoints).length > 0) {
-    let newObj = obj.dataPoints;
+    const newObj = { ...obj.dataPoints };
     Object.keys(newObj).forEach(
       (key) => newObj[key] === true && delete newObj[key]
     );
-    obj = { ...obj, uniquePhotoCount: Object.keys(newObj).length };
+    obj = {
+      ...obj,
+      uniquePhotoCount: Object.keys(newObj).length,
+    };
   }
-  console.log(obj);
   return obj;
 };
 

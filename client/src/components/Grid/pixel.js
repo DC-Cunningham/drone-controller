@@ -5,6 +5,8 @@ const StyledPixel = styled.div`
   height: 25px;
   width: 25px;
   margin: 2px;
+  text-align: center;
+  background-colour: ${{}};
 `;
 
 const TooltipBox = styled.div`
@@ -35,18 +37,32 @@ const TooltipCard = styled.div`
 `;
 
 export default function Pixel(props) {
+  const { x, y, pointData } = props.flightPoint;
+
+  const pixel = () => {
+    if (pointData === true) {
+      console.log("true");
+      return <StyledPixel style={{ backgroundColor: "#1a963b" }}></StyledPixel>;
+    } else if (pointData === false) {
+      return <StyledPixel style={{ backgroundColor: "#70dcfa" }}></StyledPixel>;
+    } else {
+      return (
+        <StyledPixel style={{ backgroundColor: "#cc0404" }}>
+          {pointData.length > 0 ? pointData.length : ""}
+        </StyledPixel>
+      );
+    }
+  };
+
   return (
     <>
       <TooltipCard>
-        <StyledPixel style={{ backgroundColor: props.flightPoint.colour }}>
-          {props.flightPoint.photoCount > 0 ? props.flightPoint.photoCount : ""}
-        </StyledPixel>
+        {pixel()}
         <TooltipBox>
           <p>
-            Position [x: {props.flightPoint.x}, y: {props.flightPoint.y} ]
+            Position [x: {x}, y: {y} ]
           </p>
-          <p>Status: {props.flightPoint.status}</p>
-          <p>Photo Count = {props.flightPoint.photoCount}</p>
+          <p>Photo Count = {pointData.length}</p>
         </TooltipBox>
       </TooltipCard>
     </>
