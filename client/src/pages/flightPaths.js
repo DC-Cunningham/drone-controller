@@ -28,16 +28,6 @@ const StyledContainer = styled.div`
   display: block;
 `;
 
-const Title = styled.h2`
-  color:${({ theme }) => theme.primaryLight}};
-  align-text: center;
-  font-weight: 300;
-  height: 100px;
-  @media (max-width: 500px) {
-    font-size: 1rem;
-  }
-`;
-
 const CardTitle = styled.h2`
   text-align: center;
   color:${({ theme }) => theme.primaryDark}};

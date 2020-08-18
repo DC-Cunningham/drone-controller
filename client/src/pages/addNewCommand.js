@@ -109,6 +109,7 @@ const calculateFlightPath = (commands, name) => {
               : [imageCount],
           },
         };
+        break;
       }
       default: {
         break;

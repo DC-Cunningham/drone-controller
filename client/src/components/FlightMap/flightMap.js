@@ -8,7 +8,7 @@ const MapContainer = styled.div`
   height: 1200px;
   padding: 50px;
   display: flex;
-  overflow: scroll;
+  // overflow: scroll;
   flex-direction: column;
   align-items: center;
   background-color: ${({ theme }) => theme.primaryDark};
@@ -16,7 +16,6 @@ const MapContainer = styled.div`
 
 const makeArray = (flightData) => {
   const { xMin, xMax, yMin, yMax, dataPoints } = flightData;
-  console.log(dataPoints);
   const yArray = [];
   for (let i = yMin; i < yMax + 1; i++) {
     const xArray = [];
