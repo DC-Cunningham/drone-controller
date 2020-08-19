@@ -3,7 +3,11 @@ const db = require("../models");
 
 // This file empties the Books collection and inserts the books below
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/FlightPathDB");
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/FlightPathDB");
+mongoose.connect(
+  process.env.MONGODB_URI ||
+    "mongodb+srv://user1:0naGgxIfdAfFfgzw@cluster0.se6jy.mongodb.net/test"
+);
 
 const commandStringSeed = [
   {
