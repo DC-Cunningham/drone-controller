@@ -44,9 +44,9 @@ export const StyledMenu = styled.nav`
 const Menu = ({ open }) => {
   return (
     <StyledMenu open={open}>
-      <a href="/">Home</a>
+      <a href="/about">About</a>
       <a href="/flightpaths">Flight Paths</a>
-      <a href="/newcommand">Add Commands</a>
+      <a href="/newcommand">New Command</a>
     </StyledMenu>
   );
 };

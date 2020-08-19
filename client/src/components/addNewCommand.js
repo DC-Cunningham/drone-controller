@@ -1,5 +1,17 @@
 import React from "react";
 import API from "../utils/API";
+import styled from "styled-components";
+
+const StyledInput = styled.input`
+  width: 100%;
+  padding: grey;
+  border: 0px;
+  // font-size: 12px;
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 2px red;
+  }
+`;
 
 const calculateFlightPath = (commands, name) => {
   let obj = {
@@ -130,7 +142,7 @@ const calculateFlightPath = (commands, name) => {
   return obj;
 };
 
-class NewCommand extends React.Component {
+class AddNewCommand extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: "" };
@@ -166,7 +178,7 @@ class NewCommand extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Please enter a new command sequence:
-          <input
+          <StyledInput
             type="text"
             value={this.state.value}
             onChange={this.handleChange}
@@ -178,4 +190,4 @@ class NewCommand extends React.Component {
   }
 }
 
-export default NewCommand;
+export default AddNewCommand;

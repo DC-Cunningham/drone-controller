@@ -20,6 +20,16 @@ mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/FlightPathDB",
   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
+const connection =
+  "mongodb+srv://user1:CAWTeCCKJPH8iuK@cluster0.se6jy.mongodb.net/test";
+mongoose
+  .connect(connection, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log("Database Connected Successfully"))
+  .catch((err) => console.log(err));
 
 // Start the API server
 app.listen(PORT, function () {
