@@ -21,7 +21,7 @@ mongoose.connect(
   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 const connection =
-  "mongodb+srv://user1:CAWTeCCKJPH8iuK@cluster0.se6jy.mongodb.net/test";
+  "mongodb+srv://user1:password@cluster0.se6jy.mongodb.net/test";
 mongoose
   .connect(connection, {
     useNewUrlParser: true,
