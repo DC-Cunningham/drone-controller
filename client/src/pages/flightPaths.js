@@ -3,6 +3,7 @@ import API from "../utils/API";
 import FlightMap from "../components/FlightMap/flightMap";
 import styled from "styled-components";
 import Legend from "../components/FlightMap/legend";
+import Loading from "../components/FlightMap/loading";
 
 const Box = styled.div`
   width: 1200px;
@@ -63,11 +64,11 @@ max-height: 50px;
 `;
 
 function FlightPaths() {
+  const [loading, setLoading] = useState(true);
   const [storedFlightPaths, setStoredFlightPaths] = useState([]);
   const [currentFlight, setCurrentFlight] = useState({
     PhotoCount: 0,
     uniquePhotoCount: 0,
-
     sequenceCount: 0,
     xMin: 0,
     yMin: 0,
@@ -79,6 +80,7 @@ function FlightPaths() {
 
   useEffect(() => {
     loadFlightPaths();
+    setLoading(false);
   }, []);
 
   const loadFlightPaths = () => {
@@ -96,7 +98,10 @@ function FlightPaths() {
   return (
     <>
       <Box>
-        {currentFlight.sequenceCount > 0 ? (
+        {" "}
+        {loading ? (
+          <Loading />
+        ) : currentFlight.sequenceCount > 0 ? (
           <>
             <Button
               onClick={(e) =>
