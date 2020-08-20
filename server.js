@@ -14,9 +14,10 @@ if (process.env.NODE_ENV === "production") {
 }
 // Add routes, both API and view
 app.use(routes);
-// app.get("*", (request, response) => {
-//   response.sendFile(path.join(__dirname, "client/build", "index.html"));
-// });
+app.get("*", function (req, res) {
+  const index = path.join(__dirname, "build", "index.html");
+  res.sendFile(index);
+});
 
 // Connect to the Mongo DB
 mongoose.connect(
