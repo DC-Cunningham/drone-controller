@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 import { useOnClickOutside } from "./hooks";
 import { ThemeProvider } from "styled-components";
 import NewCommand from "./pages/newcommand";
