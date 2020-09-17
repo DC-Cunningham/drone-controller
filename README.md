@@ -25,13 +25,21 @@ For example:
 
 ## Screenshot
 
+### Landing page:
+
+![Landing Page Screenshot](https://github.com/DC-Cunningham/drone-controller/blob/master/client/src/Images/Drone_HP.png)
+
+### Flight Paths:
+
+![Flight Path screenshot](https://github.com/DC-Cunningham/drone-controller/blob/master/client/src/Images/Drone_FP.png)
+
 ## Installation
 
-The application has been deployed here
+The application has been deployed [here](https://secure-crag-22610.herokuapp.com/)
 
 ## Usage
 
-Saved flight paths can be chosen and their flight maps viewed. Eack coordinate square has a tooltip that gives further information about the status of the airspace (flown, unflown or photo location) and at which step in the command sequence that photos where taken.
+Saved flight paths can be chosen and their flight maps viewed. Each coordinate square has a tooltip that gives further information about the status of the airspace (flown, unflown or photo location) and at which step in the command sequence that photos where taken.
 
 New commands strings can be named added into the database where a corresponding flight path will be created for it.
 
