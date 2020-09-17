@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const routes = require("./routes");
 const app = express();
+require("dotenv").config();
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
@@ -22,7 +23,7 @@ app.get("*", function (req, res) {
 // Connect to the Mongo DB
 mongoose.connect(
   process.env.MONGODB_URI ||
-    "mongodb+srv://user1:0naGgxIfdAfFfgzw@cluster0.se6jy.mongodb.net/test",
+    `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.se6jy.mongodb.net/test`,
   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 
