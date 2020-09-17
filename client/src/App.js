@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useOnClickOutside } from "./hooks";
 import { ThemeProvider } from "styled-components";
 import NewCommand from "./pages/newcommand";
@@ -18,12 +18,12 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <div ref={node}>
-          <NavToggler open={open} setOpen={setOpen} />
-          <Menu open={open} setOpen={setOpen} />
-        </div>
-        <HashRouter>
+        <Router>
+          <GlobalStyles />
+          <div ref={node}>
+            <NavToggler open={open} setOpen={setOpen} />
+            <Menu open={open} setOpen={setOpen} />
+          </div>
           <Switch>
             <Route path="/newcommand">
               <NewCommand />
@@ -38,7 +38,7 @@ function App() {
               <Home />
             </Route>
           </Switch>
-        </HashRouter>
+        </Router>
       </ThemeProvider>
     </>
   );
