@@ -80,7 +80,7 @@ function FlightPaths() {
 
   useEffect(() => {
     loadFlightPaths();
-    setLoading(true);
+    setLoading(false);
   }, []);
 
   const loadFlightPaths = () => {
