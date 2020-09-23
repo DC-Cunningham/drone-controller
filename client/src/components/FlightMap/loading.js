@@ -13,13 +13,13 @@ const Loading = styled.div`
   animation: ${rotate360} 1s linear infinite;
   transform: translateZ(0);
 
-  border-top: 2px solid grey;
-  border-right: 2px solid grey;
-  border-bottom: 2px solid grey;
-  border-left: 4px solid black;
+  border-top: 5px solid grey;
+  border-right: 5px solid grey;
+  border-bottom: 10px solid grey;
+  border-left: 10px solid black;
   background: transparent;
-  width: 80px;
-  height: 80px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
 `;
 

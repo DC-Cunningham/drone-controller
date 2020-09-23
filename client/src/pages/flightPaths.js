@@ -31,7 +31,7 @@ const StyledContainer = styled.div`
 
 const CardTitle = styled.h2`
   text-align: center;
-  color:${({ theme }) => theme.primaryDark}};
+  color: ${({ theme }) => theme.primaryDark};
   font-weight: 300;
   height: 100px;
   @media (max-width: 500px) {
@@ -40,17 +40,17 @@ const CardTitle = styled.h2`
 `;
 
 const Data = styled.p`
-  color:${({ theme }) => theme.primaryDark}};
+  color: ${({ theme }) => theme.primaryDark};
 `;
 
 const Button = styled.button`
-max-height: 50px;
+  max-height: 50px;
   margin: 10px;
   padding: 8px 14px;
   background: #c24a66;
-  color: ${({ theme }) => theme.primaryDark}};
+  color: ${({ theme }) => theme.primaryDark};
   cursor: pointer;
-  border: 1px solid ${({ theme }) => theme.primaryDark}};
+  border: 1px solid ${({ theme }) => theme.primaryDark};
   border-radius: 10%;
   outline: 0;
   font-weight: 300;
@@ -80,7 +80,7 @@ function FlightPaths() {
 
   useEffect(() => {
     loadFlightPaths();
-    setLoading(false);
+    setLoading(true);
   }, []);
 
   const loadFlightPaths = () => {
@@ -98,7 +98,6 @@ function FlightPaths() {
   return (
     <>
       <Box>
-        {" "}
         {loading ? (
           <Loading />
         ) : currentFlight.sequenceCount > 0 ? (
