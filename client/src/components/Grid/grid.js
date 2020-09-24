@@ -4,6 +4,8 @@ import styled from "styled-components";
 
 const StyledGrid = styled.div`
   padding-bottom: 50px;
+  position: absolute;
+  left: 0;
 `;
 
 // takes in array of arrays as props

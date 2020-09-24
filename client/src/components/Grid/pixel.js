@@ -6,7 +6,8 @@ const StyledPixel = styled.div`
   width: 25px;
   margin: 2px;
   text-align: center;
-  background-colour: ${{}};
+  background-color: ${(props) => props.backgroundColor};
+  color: ${(props) => props.color};
   transition: transform 0.2s; /* Animation */
   &:hover {
     transform: scale(1.5);
@@ -37,13 +38,13 @@ const TooltipCard = styled.div`
 `;
 
 export default function Pixel(props) {
-  const { x, y, pointData } = props.flightPoint;
+  const { x, y, pointData, headerTile, label } = props.flightPoint;
 
   const pixel = () => {
-    if (pointData === true) {
+    if (pointData === true && headerTile === false) {
       return (
         <>
-          <StyledPixel style={{ backgroundColor: "#1a963b" }}></StyledPixel>
+          <StyledPixel style={{ backgroundColor: "#1a963c" }}></StyledPixel>
           <TooltipBox>
             <strong>Position:</strong>
             <p>
@@ -56,7 +57,7 @@ export default function Pixel(props) {
           </TooltipBox>
         </>
       );
-    } else if (pointData === false) {
+    } else if (pointData === false && headerTile === false) {
       return (
         <>
           <StyledPixel style={{ backgroundColor: "#70dcfa" }}></StyledPixel>
@@ -67,6 +68,14 @@ export default function Pixel(props) {
             </p>
             <strong>Unflown airspace</strong>
           </TooltipBox>
+        </>
+      );
+    } else if (headerTile === true) {
+      return (
+        <>
+          <StyledPixel style={{ backgroundColor: "#ffffff", color: "#000000" }}>
+            {label}
+          </StyledPixel>
         </>
       );
     } else {
